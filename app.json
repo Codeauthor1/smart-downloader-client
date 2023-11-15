@@ -1,14 +1,21 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "smartdownloader",
+    "slug": "smartdownloader",
+    "description": "Downloader video from your favorite social media platform",
+    "owner": "codeauthor",
+    "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "notification": {
+      "icon": "./assets/images/notification_Icon.png",
+      "color": "#000000",
+      "iosDisplayInForeground": true
+    },
+    "icon": "./assets/images/smartDownloaderLogo.png",
+    "scheme": "com.smartdownloader.codeauthor",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,18 +23,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.smartdownloader.codeauthor"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "package": "com.smartdownloader.codeauthor"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.ico"
     },
     "plugins": [
       "expo-router"

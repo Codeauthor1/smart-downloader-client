@@ -2,6 +2,12 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@widgets/*":["./widgets/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@apis/*": ["./src/apis/*"]
+    }
   },
   "include": [
     "**/*.ts",
