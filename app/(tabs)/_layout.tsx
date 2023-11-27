@@ -1,54 +1,86 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
-import Colors from '../../constants/Colors';
+import { useTheme } from 'react-native-paper';
+import { Entypo, Feather, Ionicons, SimpleLineIcons} from '@expo/vector-icons';
+import { View } from '../../components/Themed';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name:  React.ComponentProps<typeof Entypo>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <Entypo size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const theme = useTheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: theme.colors.background,
+        title: "Home",
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+          height: 120,
+        },
+        tabBarStyle: {
+          backgroundColor: theme.colors.primary,
+          height: 80,
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
+          borderBottomLeftRadius: 10
+        }
       }}>
       <Tabs.Screen
-        name="index"
+        name="HomePage"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
+          title: 'Smart Downloader',
+          headerTitleStyle: {
+            color: theme.colors.onBackground,
+            fontSize: 24,
+            left: 50,
+          },
+          
+          tabBarIcon: ({ color }) => <SimpleLineIcons name="home" size={24} color={color} />,
+          headerLeft: () => (
+            <View style={{ backgroundColor: theme.colors.primary }}>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  <Ionicons
+                    name="ios-help-buoy"
+                    size={24}
+                    color={theme.colors.onBackground}
+                    style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
               </Pressable>
-            </Link>
+            </View>
+          ),
+          headerRight: () => (
+            <View style={{ backgroundColor: theme.colors.primary }}>
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <Feather
+                      name="help-circle"
+                      size={24}
+                      color={theme.colors.onBackground}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            </View>
           ),
         }}
       />
+
       <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+        name='RealPage'
       />
     </Tabs>
   );
