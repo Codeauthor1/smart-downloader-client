@@ -21,12 +21,13 @@ module.exports = function (api) {
           [
             "module-resolver",
             {
-              root: ["./src"],
+              root: ["./"],
               alias: {
-                "@widgets": "./src/widgets/",
+                "@components": "./components/",
+                "@constants": "./constants/",
                 "@hooks": "./hooks/",
-                "@apis": "./src/apis/",
-                types: "./src/types/",
+                "@apis": "./apis/",
+                types: "./types/",
               },
             },
           ],

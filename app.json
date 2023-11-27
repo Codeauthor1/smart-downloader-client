@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "smartdownloader",
+    "name": "smart downloader",
     "slug": "smartdownloader",
     "description": "Downloader video from your favorite social media platform",
     "owner": "codeauthor",
@@ -17,7 +17,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f93961"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -28,9 +28,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#f93961",
         "package": "com.smartdownloader.codeauthor"
-      }
+      },
+      "package": "com.smartdownloader.codeauthor"
     },
     "web": {
       "bundler": "metro",
@@ -42,6 +43,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "dbbd8e1d-028b-49dc-9e03-aad5f09f9e98"
+      }
     }
   }
 }
