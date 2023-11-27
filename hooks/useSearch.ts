@@ -1,19 +1,34 @@
 import { useState } from "react";
+import { Alert } from "react-native";
+import * as Clipboard from 'expo-clipboard';
+
 
 interface UseSearchReturn {
-    url: string;
-    setUrl: (text: string) => void;
+    link: string
+    updateLink: (text: string) => void;
+    pasteLink: () => void;
 }
 
 export const useSearch: () => UseSearchReturn = () => {
-    const [url, setUrl] = useState("");
+  const [link, setLink] = useState('');
 
-    const updateUrl: (text: string) => void = text => {
-        setUrl(text)
+
+    const updateLink: (text: string) => void = text => {
+        setLink(text)
     }
 
+    const pasteLink: () => Promise<void> = async () => {
+    try {
+      const link = await Clipboard.getStringAsync();
+      setLink(prev => prev + link);
+    } catch (error) {
+      Alert.alert("Error: cannot paste link")
+    }
+  }
+
     return {
-        url,
-        setUrl: updateUrl,
+        link,
+        updateLink,
+        pasteLink
     }
 }

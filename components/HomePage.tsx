@@ -1,31 +1,14 @@
-import { Searchbar, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { Text, View} from './Themed';
 import React from 'react';
-import { useSearch } from '../hooks/useSearch';
-import Button from './Button';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
+import VideoDownloader from './VideoDownloader';
 
 const HomePage = () => {
-  const { url, setUrl } = useSearch();
   const theme = useTheme();
   return (
     <View style={styles.parentView}>
-      <View style={{ ...styles.childView, backgroundColor: theme.colors.primary }}>
-        <Searchbar
-          onChangeText={setUrl}
-          value={url} placeholder='Paste video url'
-          style={{ backgroundColor: theme.colors.tertiary, ...styles.search }}
-          icon={() => <Fontisto name="link2" size={18} color='#ffffff' />}
-          placeholderTextColor="#ffffff"
-        />
-       
-        <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
-          <Button title='Paste Link' />
-          <Button title='Download' color='#ffffff' titleColor={theme.colors.scrim} />
-        </View>
-      </View>
-
+      <VideoDownloader />
       <View style={styles.featurePostView}>
         <Text style={{ ...styles.featurePost, color: theme.colors.onBackground }}>
           Curated stories for you</Text>
@@ -49,26 +32,13 @@ const styles = StyleSheet.create({
     width,
     flex: 1,
   },
-  childView: {
-    width,
-    height: 250,
-    paddingVertical: 20,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    alignItems: "center",
-  },
-  buttonView: {
-    paddingTop: 40,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "89%"
-  },
-  search: {
-    width: 350,
-    borderRadius: 0,
-  },
 
-  featurePostView: {
+  curatedTitle: {
+
+  },
+ 
+ 
+featurePostView: {
     paddingHorizontal: 15,
     paddingVertical: 10
   },

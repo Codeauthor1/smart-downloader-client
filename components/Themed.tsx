@@ -14,7 +14,7 @@ export function Text(props: TextProps<Text>) {
   const theme = useTheme();
   // const preferredColorScheme = useColorScheme()
 
-  const color = theme.colors.primary;
+  const color = theme.colors.onBackground;
 
 
   return <DefaultText style={[{color }, style]} {...otherProps} />;
