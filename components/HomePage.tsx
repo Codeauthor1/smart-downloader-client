@@ -1,9 +1,9 @@
 import { Searchbar, useTheme } from 'react-native-paper';
-import { View} from './Themed';
+import { Text, View} from './Themed';
 import React from 'react';
 import { useSearch } from '../hooks/useSearch';
 import Button from './Button';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 
 const HomePage = () => {
@@ -22,9 +22,23 @@ const HomePage = () => {
        
         <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
           <Button title='Paste Link' />
-          <Button title='Download' color='#ffffff' titleColor={ theme.colors.scrim} />
+          <Button title='Download' color='#ffffff' titleColor={theme.colors.scrim} />
         </View>
       </View>
+
+      <View style={styles.featurePostView}>
+        <Text style={{ ...styles.featurePost, color: theme.colors.onBackground }}>
+          Curated stories for you</Text>
+      </View>
+
+      <ScrollView centerContent horizontal>
+        <Text>Music</Text>
+        <Text>Music</Text>
+        <Text>Music</Text>
+        <Text>Music</Text>
+        <Text>Music</Text>
+      </ScrollView>
+
     </View>
   )
 };
@@ -52,6 +66,14 @@ const styles = StyleSheet.create({
   search: {
     width: 350,
     borderRadius: 0,
+  },
+
+  featurePostView: {
+    paddingHorizontal: 15,
+    paddingVertical: 10
+  },
+  featurePost: {
+    fontSize: 29,
   }
 })
 
