@@ -7,10 +7,10 @@ const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 
-// // Preload an app open ad
+// Preload an app open ad
 // appOpenAd.load();
 
-// // Show the app open ad when user brings the app to the foreground.
+// Show the app open ad when user brings the app to the foreground.
 // appOpenAd.show();
 
-export const bannerAds = appOpenAd
+export default appOpenAd;

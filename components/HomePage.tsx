@@ -7,14 +7,16 @@ import CurratedPost from './CurratedPost';
 import interstitial from '../hooks/ads/useInterstitialAds';
 import { AdEventType } from 'react-native-google-mobile-ads';
 import Button from './Button';
-// import { BannerAd, InterstitialAd, TestIds } from 'react-native-google-mobile-ads';
-
+import appAdsOpen from '../hooks/ads/useAds'
+import BannerAds from './BannerAds';
 
 const HomePage = () => {
 
    const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+
+    appAdsOpen.load();
     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
       setLoaded(true);
     });
@@ -27,7 +29,9 @@ const HomePage = () => {
   }, []);
 
   // No advert ready to show yet
-  // if (!loaded) {
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <View style={styles.parentView}>
@@ -37,14 +41,14 @@ const HomePage = () => {
 
       <CurratedPost />
 
-       <Button
+       {/* <Button
       title="Show Interstitial"
       onPress={() => {
         interstitial.show();
       }}
-    />
+    /> */}
 
-      {/* <BannerAd unitId={TestIds.BANNER} size={"10%"} /> */}
+      <BannerAds  />
 
     </View>
   )
