@@ -1,26 +1,50 @@
-import { useTheme } from 'react-native-paper';
-import { Text, View} from './Themed';
-import React from 'react';
-import { Dimensions, ScrollView, StyleSheet } from 'react-native';
+import { View} from './Themed';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 import VideoDownloader from './VideoDownloader';
+import CurratedTitle from './CurratedTitle';
+import CurratedPost from './CurratedPost';
+import interstitial from '../hooks/ads/useInterstitialAds';
+import { AdEventType } from 'react-native-google-mobile-ads';
+import Button from './Button';
+// import { BannerAd, InterstitialAd, TestIds } from 'react-native-google-mobile-ads';
+
 
 const HomePage = () => {
-  const theme = useTheme();
+
+   const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      setLoaded(true);
+    });
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, []);
+
+  // No advert ready to show yet
+  // if (!loaded) {
+
   return (
     <View style={styles.parentView}>
       <VideoDownloader />
-      <View style={styles.featurePostView}>
-        <Text style={{ ...styles.featurePost, color: theme.colors.onBackground }}>
-          Curated stories for you</Text>
-      </View>
 
-      <ScrollView centerContent horizontal>
-        <Text>Music</Text>
-        <Text>Music</Text>
-        <Text>Music</Text>
-        <Text>Music</Text>
-        <Text>Music</Text>
-      </ScrollView>
+      <CurratedTitle />
+
+      <CurratedPost />
+
+       <Button
+      title="Show Interstitial"
+      onPress={() => {
+        interstitial.show();
+      }}
+    />
+
+      {/* <BannerAd unitId={TestIds.BANNER} size={"10%"} /> */}
 
     </View>
   )
@@ -32,19 +56,6 @@ const styles = StyleSheet.create({
     width,
     flex: 1,
   },
-
-  curatedTitle: {
-
-  },
- 
- 
-featurePostView: {
-    paddingHorizontal: 15,
-    paddingVertical: 10
-  },
-  featurePost: {
-    fontSize: 29,
-  }
 })
 
 export default HomePage

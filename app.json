@@ -8,11 +8,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "notification": {
-      "icon": "./assets/images/notification_Icon.png",
+      "icon": "./assets/images/smartDownloader.png",
       "color": "#000000",
       "iosDisplayInForeground": true
     },
-    "icon": "./assets/images/smartDownloaderLogo.png",
+    "icon": "./assets/images/smartDownloader.png",
     "scheme": "com.smartdownloader.codeauthor",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -39,7 +39,15 @@
       "favicon": "./assets/images/favicon.ico"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+       [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
@@ -52,5 +60,9 @@
         "projectId": "dbbd8e1d-028b-49dc-9e03-aad5f09f9e98"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2938490606918728~2539917324",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
   }
 }

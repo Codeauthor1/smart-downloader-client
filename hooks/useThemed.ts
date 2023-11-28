@@ -18,9 +18,19 @@ const useThemed = () => {
           secondary: '#fd8394',
           tertiary: '#fe8191',
           scrim: '#fa779c',
+          onBackground: '#ffffff'
         }
       }
-      : { ...MD3LightTheme, colors: theme.light };
+      : {
+        ...MD3LightTheme, colors: {
+          ...theme.light,
+          primary: '#663399',
+          secondary: '#9171b4',
+          tertiary: '#a085c4',
+          scrim: '#7449a4',
+          onBackground: '#ffffff'
+        }
+      };
 
   return {paperTheme, LightTheme}
 }

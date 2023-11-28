@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import "expo-dev-client";
 
 
-import { PaperProvider, Text, useTheme } from 'react-native-paper';
+import { PaperProvider, useTheme } from 'react-native-paper';
 import useThemed from '../hooks/useThemed';
 import { useColorScheme } from 'react-native';
-import HomeHeader from '../components/HomeHeader';
+import SplashPage from './SplashPage';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -42,7 +42,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   if (!loaded) {
-    return null;
+    return <SplashPage />;
   }
 
   return <RootLayoutNav />;

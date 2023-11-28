@@ -18,10 +18,10 @@ const VideoDownloader: React.FunctionComponent = () => {
         value={link}
         placeholder='Paste video url'
         style={{ backgroundColor: theme.colors.tertiary, ...styles.search,  }}
-        inputStyle={{color: "#ffffff"}}
-        icon={() => <Fontisto name="link2" size={18} color='#ffffff' />}
-        iconColor='#ffffff'
-        placeholderTextColor="#ffffff"
+        inputStyle={{color: theme.colors.onBackground}}
+        icon={() => <Fontisto name="link2" size={18} color={theme.colors.onBackground} />}
+        iconColor={theme.colors.onBackground}
+        placeholderTextColor={theme.colors.onBackground}
         dataDetectorTypes='link'
         autoComplete='url'
         inputMode='url'
@@ -38,8 +38,16 @@ const VideoDownloader: React.FunctionComponent = () => {
         onIconPress={downloadVideo}
       />
       <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
-        <Button title='Paste Link' onPress={pasteLink}/>
-        <Button title='Download' color='#ffffff' titleColor={theme.colors.scrim} onPress={downloadVideo}/>
+        <Button style={styles.button} title='Paste Link' onPress={pasteLink} disable={isLoading}/>
+        <Button
+          title='Download'
+          color={theme.colors.onBackground}
+          titleColor={theme.colors.scrim}
+          isLoading={isLoading}
+          disable={isLoading}
+          onPress={downloadVideo}
+          style={styles.button}
+        />
       </View>
     </View>
   )
@@ -49,24 +57,28 @@ const VideoDownloader: React.FunctionComponent = () => {
 const { width } = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
-      view: {
+  view: {
     width,
     height: 250,
     paddingVertical: 20,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     alignItems: "center",
-    },
-     search: {
+  },
+  search: {
     width: "90%",
-    borderRadius: 0,
-    },
-      buttonView: {
+    borderRadius: 5,
+
+  },
+  buttonView: {
     paddingTop: 40,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "89%"
   },
-})
+  button: {
+    borderRadius: 5,
+  }
+});
 
 export default VideoDownloader
