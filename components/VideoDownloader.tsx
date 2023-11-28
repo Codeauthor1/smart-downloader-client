@@ -6,10 +6,8 @@ import { useSearch } from '../hooks/useSearch'
 import Button from './Button';
 
 const VideoDownloader: React.FunctionComponent = () => {
-  const { pasteLink, link, updateLink } = useSearch();
-  const search: () => void = () => alert("Download")
+  const { pasteLink, link, updateLink, isLoading, downloadVideo } = useSearch();
   const theme = useTheme();
-  const [isLoading, setLoading] = useState(false);
 
   
     
@@ -29,7 +27,7 @@ const VideoDownloader: React.FunctionComponent = () => {
         inputMode='url'
         textContentType='URL'
         keyboardType='url'
-        onSubmitEditing={search}
+        onSubmitEditing={downloadVideo}
         returnKeyType='search'
         accessible
         autoFocus
@@ -37,11 +35,11 @@ const VideoDownloader: React.FunctionComponent = () => {
         enterKeyHint='search'
         importantForAutofill='auto'
         loading={isLoading}
-        onIconPress={search}
+        onIconPress={downloadVideo}
       />
       <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
         <Button title='Paste Link' onPress={pasteLink}/>
-        <Button title='Download' color='#ffffff' titleColor={theme.colors.scrim} onPress={search}/>
+        <Button title='Download' color='#ffffff' titleColor={theme.colors.scrim} onPress={downloadVideo}/>
       </View>
     </View>
   )

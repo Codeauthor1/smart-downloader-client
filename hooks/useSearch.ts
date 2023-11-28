@@ -4,13 +4,17 @@ import * as Clipboard from 'expo-clipboard';
 
 
 interface UseSearchReturn {
-    link: string
+    link: string;
+    isLoading: boolean;
     updateLink: (text: string) => void;
     pasteLink: () => void;
+    downloadVideo: () => void;
 }
 
 export const useSearch: () => UseSearchReturn = () => {
-  const [link, setLink] = useState('');
+    const [link, setLink] = useState('');
+  const [isLoading, setLoading] = useState(false);
+    
 
 
     const updateLink: (text: string) => void = text => {
@@ -24,11 +28,22 @@ export const useSearch: () => UseSearchReturn = () => {
     } catch (error) {
       Alert.alert("Error: cannot paste link")
     }
+    }
+    
+    const downloadVideo: () => void = () => {
+        setLoading(true);
+        alert("Download");
+        setTimeout(() => {
+            setLoading(false);
+        }, 5000)
   }
+
 
     return {
         link,
+        isLoading,
         updateLink,
-        pasteLink
+        pasteLink,
+        downloadVideo
     }
 }
