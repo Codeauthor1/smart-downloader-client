@@ -4,10 +4,33 @@ import { Fontisto } from '@expo/vector-icons'
 import { Searchbar, useTheme } from 'react-native-paper'
 import { useSearch } from '../hooks/useSearch'
 import Button from './Button';
+import { useRewardAds } from '@hooks/ads/rewardAds'
 
 const VideoDownloader: React.FunctionComponent = () => {
   const { pasteLink, link, updateLink, isLoading, downloadVideo } = useSearch();
   const theme = useTheme();
+
+  const [canDownloadVideo, setCanDownloadVideo] = useState(false);
+
+  const { loaded, rewarded } = useRewardAds();
+
+  const gate = () => {
+    downloadVideo()
+    // if(canDownloadVideo) {
+    //   downloadVideo()
+    // } else {
+    //   rewarded.show();
+    //   // setCanDownloadVideo(true)
+
+    //    downloadVideo()
+    // }
+  }
+
+
+    // No advert ready to show yet
+  if(!loaded) {
+    return null;
+  };
 
   
     
@@ -27,7 +50,7 @@ const VideoDownloader: React.FunctionComponent = () => {
         inputMode='url'
         textContentType='URL'
         keyboardType='url'
-        onSubmitEditing={downloadVideo}
+        onSubmitEditing={gate}
         returnKeyType='search'
         accessible
         autoFocus
@@ -35,7 +58,7 @@ const VideoDownloader: React.FunctionComponent = () => {
         enterKeyHint='search'
         importantForAutofill='auto'
         loading={isLoading}
-        onIconPress={downloadVideo}
+        onIconPress={gate}
       />
       <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
         <Button style={styles.button} title='Paste Link' onPress={pasteLink} disable={isLoading}/>
@@ -45,7 +68,7 @@ const VideoDownloader: React.FunctionComponent = () => {
           titleColor={theme.colors.scrim}
           isLoading={isLoading}
           disable={isLoading}
-          onPress={downloadVideo}
+          onPress={gate}
           style={styles.button}
         />
       </View>
@@ -64,6 +87,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     alignItems: "center",
+    marginBottom: 20
   },
   search: {
     width: "90%",

@@ -18,19 +18,6 @@ module.exports = function (api) {
               path: ".env",
             },
           ],
-          [
-            "module-resolver",
-            {
-              root: ["./"],
-              alias: {
-                "@components": "./components/",
-                "@constants": "./constants/",
-                "@hooks": "./hooks/",
-                "@apis": "./apis/",
-                types: "./types/",
-              },
-            },
-          ],
         ],
       },
     },

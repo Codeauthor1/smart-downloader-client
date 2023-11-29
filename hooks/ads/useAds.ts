@@ -1,4 +1,4 @@
-import { AppOpenAd, TestIds, AdEventType } from 'react-native-google-mobile-ads';
+import { AppOpenAd, TestIds } from 'react-native-google-mobile-ads';
 
 const adUnitId = __DEV__ ? TestIds.APP_OPEN : 'ca-app-pub-2938490606918728/7953123584';
 

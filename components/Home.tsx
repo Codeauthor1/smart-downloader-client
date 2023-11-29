@@ -1,4 +1,4 @@
-import { View} from './Themed';
+import { View, Text} from '@component/Themed';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import VideoDownloader from './VideoDownloader';
@@ -7,16 +7,14 @@ import CurratedPost from './CurratedPost';
 import interstitial from '../hooks/ads/useInterstitialAds';
 import { AdEventType } from 'react-native-google-mobile-ads';
 import Button from './Button';
-import appAdsOpen from '../hooks/ads/useAds'
-import BannerAds from './BannerAds';
+import BannerAds from './ads/BannerAds';
 
-const HomePage = () => {
+const Home: React.FunctionComponent = () => {
 
    const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
 
-    appAdsOpen.load();
     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
       setLoaded(true);
     });
@@ -34,24 +32,28 @@ const HomePage = () => {
   }
 
   return (
-    <View style={styles.parentView}>
-      <VideoDownloader />
-
-      <CurratedTitle />
-
-      <CurratedPost />
-
-       {/* <Button
-      title="Show Interstitial"
-      onPress={() => {
-        interstitial.show();
-      }}
-    /> */}
-
-      <BannerAds  />
-
-    </View>
+    <Text>sjk</Text>
   )
+
+  // return (
+  //   <View style={styles.parentView}>
+  //     <VideoDownloader />
+
+  //     <CurratedTitle />
+
+  //     <CurratedPost />
+
+  //      {/* <Button
+  //     title="Show Interstitial"
+  //     onPress={() => {
+  //       interstitial.show();
+  //     }}
+  //   /> */}
+
+  //     <BannerAds  />
+
+  //   </View>
+  // )
 };
 
 const {width } = Dimensions.get("screen");
@@ -62,4 +64,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HomePage
+export default Home
