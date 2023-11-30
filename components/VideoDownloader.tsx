@@ -6,8 +6,16 @@ import { useSearch } from '../hooks/useSearch'
 import Button from './Button';
 import { useRewardAds } from '@hooks/ads/rewardAds'
 
-const VideoDownloader: React.FunctionComponent = () => {
-  const { pasteLink, link, updateLink, isLoading, downloadVideo } = useSearch();
+interface Props {
+  searchVideo: () => void;
+  pasteLink: () => void;
+  updateLink: (text: string) => void;
+  link: string;
+  isLoading: boolean;
+}
+
+const VideoDownloader: React.FunctionComponent<Props> = ({searchVideo, link, pasteLink, updateLink, isLoading}) => {
+  // const { pasteLink, link, updateLink, isLoading, downloadVideo,  } = useSearch();
   const theme = useTheme();
 
   const [canDownloadVideo, setCanDownloadVideo] = useState(false);
@@ -15,7 +23,7 @@ const VideoDownloader: React.FunctionComponent = () => {
   const { loaded, rewarded } = useRewardAds();
 
   const gate = () => {
-    downloadVideo()
+    searchVideo()
     // if(canDownloadVideo) {
     //   downloadVideo()
     // } else {
@@ -27,10 +35,10 @@ const VideoDownloader: React.FunctionComponent = () => {
   }
 
 
-    // No advert ready to show yet
-  if(!loaded) {
-    return null;
-  };
+  //   // No advert ready to show yet
+  // if(!loaded) {
+  //   return null;
+  // };
 
   
     
@@ -61,15 +69,14 @@ const VideoDownloader: React.FunctionComponent = () => {
         onIconPress={gate}
       />
       <View style={{ ...styles.buttonView, backgroundColor: theme.colors.primary }}>
-        <Button style={styles.button} title='Paste Link' onPress={pasteLink} disable={isLoading}/>
+        <Button title='Paste Link' onPress={pasteLink} disable={isLoading}/>
         <Button
-          title='Download'
+          title='Search'
           color={theme.colors.onBackground}
           titleColor={theme.colors.scrim}
           isLoading={isLoading}
           disable={isLoading}
           onPress={gate}
-          style={styles.button}
         />
       </View>
     </View>
@@ -99,9 +106,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "89%"
-  },
-  button: {
-    borderRadius: 5,
   }
 });
 

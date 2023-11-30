@@ -31,7 +31,7 @@ const Button: React.FunctionComponent<Props> = ({ title, titleColor, color , onP
 const styles = StyleSheet.create({
   button: {
     height: 54,
-    borderRadius: 0,
+    borderRadius: 5,
   },
   title: {
     fontSize: 18,
