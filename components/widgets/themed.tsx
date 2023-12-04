@@ -3,7 +3,7 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, useColorScheme, View as DefaultView, ViewProps, SafeAreaView as DefaultSafeAreaView } from 'react-native';
+import { Text as DefaultText, View as DefaultView, ViewProps, SafeAreaView as DefaultSafeAreaView } from 'react-native';
 
 import { TextProps, useTheme } from 'react-native-paper';
 
@@ -12,7 +12,6 @@ import { TextProps, useTheme } from 'react-native-paper';
 export function Text(props: TextProps<Text>) {
   const { style,  ...otherProps } = props;
   const theme = useTheme();
-  // const preferredColorScheme = useColorScheme()
 
   const color = theme.colors.onBackground;
 
@@ -38,3 +37,5 @@ export function SafeAreaView(props: ViewProps) {
   return <DefaultSafeAreaView style={[{ backgroundColor}, style]} {...otherProps} />;
 }
 
+
+export { TextProps };

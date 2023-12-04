@@ -1,27 +1,26 @@
 import { Alert, Dimensions, StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Fontisto } from '@expo/vector-icons'
 import { Searchbar, useTheme } from 'react-native-paper'
-import { useSearch } from '../hooks/useSearch'
-import Button from './Button';
+import Button from './widgets/button';
 import { useRewardAds } from '@hooks/ads/rewardAds'
+import { VideoDownloaderContext } from '@context/VideoDownloaderContext'
+import { Toast } from 'toastify-react-native'
 
-interface Props {
-  searchVideo: () => void;
-  pasteLink: () => void;
-  updateLink: (text: string) => void;
-  link: string;
-  isLoading: boolean;
-}
 
-const VideoDownloader: React.FunctionComponent<Props> = ({searchVideo, link, pasteLink, updateLink, isLoading}) => {
-  // const { pasteLink, link, updateLink, isLoading, downloadVideo,  } = useSearch();
+const VideoSearch: React.FunctionComponent = () => {
   const theme = useTheme();
+  const { searchVideo, updateLink, link, isLoading, pasteLink} = useContext(VideoDownloaderContext);
+
 
   const [canDownloadVideo, setCanDownloadVideo] = useState(false);
 
-  const { loaded, rewarded } = useRewardAds();
+   const showToasts = () => {
+    Toast.success('Promised is resolved')
+  }
 
+  const { loaded, rewarded } = useRewardAds();
+  
   const gate = () => {
     searchVideo()
     // if(canDownloadVideo) {
@@ -109,4 +108,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default VideoDownloader
+export default VideoSearch;

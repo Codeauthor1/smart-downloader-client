@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, useColorScheme } from 'react-native'
 import React from 'react'
-import Button from './Button'
+import Button from './button'
 import { useTheme } from 'react-native-paper';
 
 interface ScrollButtonProps {

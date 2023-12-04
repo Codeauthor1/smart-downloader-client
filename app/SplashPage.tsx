@@ -1,13 +1,7 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { useTheme } from 'react-native-paper'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import appOpenAd from '@hooks/ads/useAds';
 
-const SplashPage = () => {
-    const theme = useTheme();
-    // appOpenAd.load();
-    // appOpenAd.show();
+const SplashPage: React.FunctionComponent = () => {
   return (
       <View style={{ ...styles.splashView, backgroundColor: '#f93961'}}>
           <MaterialCommunityIcons name="progress-download" size={100} color='#ffffff' />
@@ -19,7 +13,7 @@ const SplashPage = () => {
   )
 }
 
-export default SplashPage
+export default SplashPage;
 
 const styles = StyleSheet.create({
     splashView: {

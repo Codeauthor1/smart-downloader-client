@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Alert } from "react-native";
 import * as Clipboard from 'expo-clipboard';
 import { get,  download } from "@utils/service";
 import { youtubeApi } from "@apis/youtube";
-import { type videoFormat, type relatedVideo} from 'ytdl-core';
+import { type videoFormat, type relatedVideo, type VideoDetails } from 'ytdl-core';
+
+interface AxiosGetReturn {
+  videoFormat: videoFormat[],
+  relatedVideo: relatedVideo[],
+  VideoDetails: VideoDetails[]
+}
 
 interface UseSearchReturn {
     link: string;
@@ -12,9 +18,9 @@ interface UseSearchReturn {
     isLoading: boolean;
     videoFormat: videoFormat[];
     updateLink: (text: string) => void;
-    pasteLink: () => void;
-    downloadVideo: () => void;
-    searchVideo: () => void;
+    pasteLink: () => Promise<void>;
+    downloadVideo: () => Promise<void>;
+    searchVideo: () => Promise<string | undefined>;
     selectVideoFormat: (label: string, uri: string) => void;
 }
 
@@ -39,22 +45,37 @@ export const useSearch: () => UseSearchReturn = () => {
     }
   }
 
-  const searchVideo: () => Promise<void> = async () => {
-   try {
-     setLoading(true);
 
-     const localVideoFormat = await get(youtubeApi, link);
+  const searchVideo: () => Promise<string | undefined> = async () => {
+    try {
+      setLoading(true);
+
+      const localVideoFormat: AxiosGetReturn = await get(youtubeApi, link);
+      console.log('localVideoFormat: ', localVideoFormat);
      
-     if(!localVideoFormat) {
-       setLoading(false);
-       return;
-     }
-      setVideoFormat(localVideoFormat);
-     setLoading(false);
-   } catch (error) {
-    Alert.alert(JSON.stringify(error));
-   }
-  }
+      // if(!localVideoFormat) {
+      //   setLoading(false);
+      //   return;
+      // }
+
+      // const filterVideoFormat = useMemo(() => {
+       
+      //   const filteredLocalVideoFormat = localVideoFormat.filter(video => video.hasVideo);
+      //   console.log('filteredLocalVideoFormat: ', filteredLocalVideoFormat);
+
+      //   return filteredLocalVideoFormat;
+       
+      // }, []);
+
+      // setVideoFormat(filterVideoFormat);
+      // console.log('filterVideoFormat: ', filterVideoFormat);
+      // console.log('filterVideoFormat: ', filterVideoFormat.length);
+    } catch(error) {
+      return JSON.stringify(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
       const selectVideoFormat: (label: string, uri: string) => void = (label, uri) => {
         setLabel(label);
@@ -65,9 +86,9 @@ export const useSearch: () => UseSearchReturn = () => {
     try {
       // await download()
     } catch(error) {
-       Alert.alert(JSON.stringify(error));
+        Alert.alert(JSON.stringify(error));
     }
-   
+    
   };
 
 

@@ -1,6 +1,6 @@
 import { StyleSheet, useColorScheme } from 'react-native'
 import React from 'react'
-import { View, Text } from './Themed'
+import { View, Text } from './themed'
 import { useTheme } from 'react-native-paper';
 import CuratedScrollButton from './CurratedScrollButton';
 

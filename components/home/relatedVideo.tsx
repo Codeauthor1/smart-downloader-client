@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
-import { View, Text } from '@component/Themed'
+import React, { useContext } from 'react'
+import { View, Text } from '@component/widgets/themed'
+import { VideoDownloaderContext } from '@context/VideoDownloaderContext';
 
 const RelatedVideo = () => {
+  const { relatedVideos } = useContext(VideoDownloaderContext);
+  
+  if(relatedVideos?.length === 0) return null;
+  
   return (
     <View>
       <Text style={styles.title}>RelatedVideo</Text>

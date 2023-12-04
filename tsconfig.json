@@ -7,7 +7,13 @@
       "@component/*": ["./components/*"],
       "@hooks/*": ["./hooks/*"],
       "@apis/*": ["./apis/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@context/*": ["./context/*"],
+      "@services/*": ["./services/*"],
+      "@widgets/*": ["./components/widgets/*"],
+      "@providers/*": ["./providers/*"],
+      "@app/*": ["./app/*"],
+      "@assets/*": ["./assets/*"]
     }
   },
   "include": [

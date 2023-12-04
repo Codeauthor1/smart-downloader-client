@@ -16,6 +16,9 @@
     "production": {
       "env": {
         "BASE__URL": "http://192.168.47.50:2500"
+      },
+      "android": {
+        "buildType": "apk"
       }
     }
   },
