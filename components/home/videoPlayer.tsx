@@ -1,10 +1,10 @@
-import { StyleSheet, Dimensions, Alert } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { View, Text } from '@component/widgets/themed';
 import DefaultVideoPlayer from 'expo-video-player'
-import { useSearch } from '@hooks/useSearch';
 import { ResizeMode } from 'expo-av'
 import React, { useContext } from 'react';
-import { VideoDownloaderContext } from '@context/VideoDownloaderContext';
+import { VideoDownloaderContext } from '@context/videoDownloaderContext';
+import { Toast } from 'toastify-react-native';
 
 
 const VideoPlayer: React.FunctionComponent = () => {
@@ -25,12 +25,11 @@ const VideoPlayer: React.FunctionComponent = () => {
                         height: 220,
                         width: '100%'
                     }
-
                 }}
                 style={{
                     height: 220,
                 }}
-                errorCallback={({message}) => Alert.alert(message)}
+                errorCallback={({message}) =>  Toast.error(message, "top")}
                 
             />
             <Text style={styles.videoTitle}>{  videoDetails.title }</Text>
@@ -41,13 +40,11 @@ const VideoPlayer: React.FunctionComponent = () => {
 
 export default VideoPlayer
 
-const { width } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     view: {
         height: 'auto',
         width: '100%',
-        margin:3
+        margin: 3,
     },
     VideoView: {
         height: 250,
@@ -56,6 +53,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         textAlignVertical: "center",
         fontSize: 24,
-        paddingVertical: 10
+        paddingVertical: 10,
+        marginHorizontal: 15,
     },
 })

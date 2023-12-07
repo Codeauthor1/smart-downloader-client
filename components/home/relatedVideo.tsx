@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
 import { View, Text } from '@component/widgets/themed'
-import { VideoDownloaderContext } from '@context/VideoDownloaderContext';
+import { VideoDownloaderContext } from '@context/videoDownloaderContext';
 
 const RelatedVideo = () => {
   const { relatedVideos } = useContext(VideoDownloaderContext);

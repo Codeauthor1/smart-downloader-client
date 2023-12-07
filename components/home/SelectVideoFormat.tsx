@@ -1,30 +1,20 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import React, { useContext } from 'react';
-import { List, Portal, useTheme } from 'react-native-paper';
+import { List } from 'react-native-paper';
 import Button from '@component/widgets/button';
-import { VideoDownloaderContext } from '@context/VideoDownloaderContext';
-import { download } from '@utils/service';
-import { AntDesign } from '@expo/vector-icons';
-import { View } from '@component/widgets/themed';
+import { VideoDownloaderContext } from '@context/videoDownloaderContext';
 
 const SelectVideoFormat: React.FunctionComponent = () => {
-    const { videoFormats, selectVideoFormat, label, videoDetails, selectedFormat } = useContext(VideoDownloaderContext);
-    const theme = useTheme();
+    const { videoFormats, selectVideoFormat, label, downloadVideo } = useContext(VideoDownloaderContext);
     const [expanded, setExpanded] = React.useState(true);
 
     const handleAccordion = () => setExpanded(!expanded);
-
-    const handleDownload: () => void = () => {
-        if(!selectedFormat || !videoDetails) return;
-        download(selectedFormat, videoDetails)
-        return;
-    }
     
     if(videoFormats?.length === 0 || !videoFormats) return null
 
     return (
         <List.Section style={styles.downloadView}>
-            <Button title='Download' onPress={handleDownload} width={170} />
+            <Button title='Download' onPress={downloadVideo} width={170} />
             <List.Accordion
                 title={label || 'Select format'}
                 style={styles.formatView}
@@ -33,21 +23,16 @@ const SelectVideoFormat: React.FunctionComponent = () => {
             >
                 {
                     videoFormats.flatMap((videoFormat, index) => {
-                        const { qualityLabel, hasAudio, hasVideo, container, url } = videoFormat;
-                        // console.log('hasVideo: ', hasVideo);
-                        // console.log('hasAudio: ', hasAudio);
+                        const { qualityLabel, container, } = videoFormat;
                         return (
-                            <List.AccordionGroup  key={index}>
-                                <View style={styles.AccordionView}>
-                                    <List.Item
+                            <List.AccordionGroup key={index}>
+                                <List.Item
                                     title={`${container} ${qualityLabel}`}
-                                    onPress={() => selectVideoFormat(`${container} ${qualityLabel}`, videoFormat)}
-                                    
+                                    onPress={() => {
+                                        selectVideoFormat(`${container} ${qualityLabel}`, index)
+                                        setExpanded(false)
+                                    }}
                                 />
-                                {
-                                    hasAudio ?  <AntDesign name="sound" size={18} color={ theme.colors.onBackground } /> : null
-                               }
-                                </View>
                             </List.AccordionGroup>
                         )
                     })
@@ -76,9 +61,4 @@ const styles = StyleSheet.create({
         width: 170,
         borderRadius: 5,
     },
-    AccordionView: {
-        borderBottomColor: 'red',
-        flexDirection: 'row',
-        // borderBottomWidth: 44
-    }
 })

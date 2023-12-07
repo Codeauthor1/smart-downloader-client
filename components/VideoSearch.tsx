@@ -3,41 +3,17 @@ import React, { useContext, useState } from 'react'
 import { Fontisto } from '@expo/vector-icons'
 import { Searchbar, useTheme } from 'react-native-paper'
 import Button from './widgets/button';
-import { useRewardAds } from '@hooks/ads/rewardAds'
-import { VideoDownloaderContext } from '@context/VideoDownloaderContext'
+import { VideoDownloaderContext } from '@context/videoDownloaderContext'
 import { Toast } from 'toastify-react-native'
 
 
 const VideoSearch: React.FunctionComponent = () => {
   const theme = useTheme();
   const { searchVideo, updateLink, link, isLoading, pasteLink} = useContext(VideoDownloaderContext);
-
-
-  const [canDownloadVideo, setCanDownloadVideo] = useState(false);
-
-   const showToasts = () => {
-    Toast.success('Promised is resolved')
-  }
-
-  const { loaded, rewarded } = useRewardAds();
   
   const gate = () => {
-    searchVideo()
-    // if(canDownloadVideo) {
-    //   downloadVideo()
-    // } else {
-    //   rewarded.show();
-    //   // setCanDownloadVideo(true)
-
-    //    downloadVideo()
-    // }
+    searchVideo();
   }
-
-
-  //   // No advert ready to show yet
-  // if(!loaded) {
-  //   return null;
-  // };
 
   
     

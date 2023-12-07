@@ -1,15 +1,18 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { ThemeProvider } from '@react-navigation/native';
+import { ThemeProvider as DefaultThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
+import ToastManager from 'toastify-react-native';
 import "expo-dev-client";
+
 
 
 import { PaperProvider } from 'react-native-paper';
 import useThemed from '../hooks/useThemed';
 import SplashPage from './splashPage';
 import { Slot } from 'expo-router';
+import ThemeProvider from '@providers/themeProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,10 +55,14 @@ function RootLayoutNav() {
   const { paperTheme, LightTheme } = useThemed();
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <ThemeProvider value={LightTheme}>
-        <Slot />
-      </ThemeProvider>
-    </PaperProvider>
+    // <ThemeProvider>
+      <PaperProvider theme={paperTheme}>
+        <DefaultThemeProvider value={LightTheme} >
+          <Slot />
+          <ToastManager />
+        
+        </DefaultThemeProvider>
+      </PaperProvider>
+    // </ThemeProvider>
   );
-}
+};

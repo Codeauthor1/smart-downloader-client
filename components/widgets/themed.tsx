@@ -3,7 +3,8 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, View as DefaultView, ViewProps, SafeAreaView as DefaultSafeAreaView } from 'react-native';
+import { Text as DefaultText, View as DefaultView, ViewProps, } from 'react-native';
+import {  SafeAreaView as DefaultSafeAreaView } from 'react-native-safe-area-context';
 
 import { TextProps, useTheme } from 'react-native-paper';
 

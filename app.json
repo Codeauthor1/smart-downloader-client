@@ -24,12 +24,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.smartdownloader.codeauthor"
+      "bundleIdentifier": "com.smartdownloader.codeauthor",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#f93961",
-        "package": "com.smartdownloader.codeauthor"
+        "backgroundColor": "#f93961"
       },
       "package": "com.smartdownloader.codeauthor"
     },
@@ -69,9 +71,5 @@
         "projectId": "dbbd8e1d-028b-49dc-9e03-aad5f09f9e98"
       }
     }
-  },
-  "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-2938490606918728~2539917324",
-    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
   }
 }

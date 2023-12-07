@@ -13,6 +13,8 @@ const SplashPage: React.FunctionComponent = () => {
   )
 }
 
+
+
 export default SplashPage;
 
 const styles = StyleSheet.create({

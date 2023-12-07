@@ -1,12 +1,20 @@
 
 import { Link, Stack } from 'expo-router';
 import { Pressable } from 'react-native';
-import { View } from '@component/widgets/themed';
-import { Feather, Ionicons } from '@expo/vector-icons';
+import { View } from '@widgets/themed';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
+import { useContext } from 'react';
+import { ThemeContext } from '@context/themeContext';
+import { Toast } from 'toastify-react-native';
+
 
 function HomeLayout() {
-    const theme = useTheme()
+    const theme = useTheme();
+    const {theme: themeState, toggleTheme} = useContext(ThemeContext);
+
+    const notify: () => void = () => Toast.info('Coming  Soon', 'top');
+
 
     return (
         <Stack
@@ -25,14 +33,14 @@ function HomeLayout() {
                     },
               
                     headerLeft: () => (
-                        <View style={{ backgroundColor: theme.colors.primary, paddingRight: '20%' }}>
-                            <Pressable>
+                        <View style={{ backgroundColor: theme.colors.primary, paddingRight: '5%' }}>
+                            <Pressable onPress={notify}>
                                 {({ pressed }) => (
-                                    <Ionicons
-                                        name="ios-help-buoy"
-                                        size={24}
+                                    <Entypo
+                                        name={themeState === 'dark' ? 'light-up' : "light-down"}
+                                        size={28}
                                         color={theme.colors.onBackground}
-                                        style={{ marginLeft: 15, opacity: pressed ? 0.5 : 1 }}
+                                        style={{ opacity: pressed ? 0.5 : 1 }}
                                     />
                                 )}
                             </Pressable>
@@ -41,14 +49,14 @@ function HomeLayout() {
 
                     headerRight: () => (
                         <View style={{ backgroundColor: theme.colors.primary }}>
-                            <Link href="/splashPage" asChild>
+                            <Link href="/download/" asChild>
                                 <Pressable>
                                     {({ pressed }) => (
-                                        <Feather
-                                            name="help-circle"
-                                            size={24}
+                                        <MaterialCommunityIcons
+                                            name="progress-download"
+                                            size={28}
                                             color={theme.colors.onBackground}
-                                            style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                                            style={{ opacity: pressed ? 0.5 : 1 }}
                                         />
                                     )}
                                 </Pressable>
